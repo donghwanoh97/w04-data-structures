@@ -91,6 +91,54 @@ int main()
 int insertSortedLL(LinkedList *ll, int item)
 {
 	/* add your code here */
+
+	// 1. 연결 리스트가 빈 경우
+	if (ll->head == NULL) {
+		insertNode(ll, 0, item);
+		return 0;
+	}
+	
+	// 2. 연결 리스트의 노드 개수가 1개 이상
+	// 2-1. item 다음으로 큰 노드 인덱스 찾기
+	int index = 0;
+	ListNode *cur = ll->head;
+	
+	// while (cur != NULL) {
+	// 	// 이미 같은 값이 존재하는 경우
+	// 	if (item == cur->item) {
+	// 		return -1;
+	// 	}
+
+	// 	if (item > cur->item) {
+	// 		index++;
+	// 		cur = cur->next;
+	// 	} else {
+	// 		break;
+	// 	}
+	// }
+
+	while (cur != NULL && item > cur->item) {
+		cur = cur->next;
+		index++;
+	}
+
+	if (cur != NULL && item == cur->item) {
+		return -1;
+	}
+	
+	// 2-2. index 이전에 값 삽입하기
+	// int res = insertNode(ll, index, item);
+
+	
+	// if(res != 0) {
+	// 	return res;
+	// }
+
+	if (insertNode(ll, index, item) == -1) {
+        return -1;
+	}
+
+	return index;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
