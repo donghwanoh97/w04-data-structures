@@ -104,6 +104,33 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+		LinkedList ll3;
+		ll3.head = NULL;
+		ll3.size = 0;
+
+		ListNode *cur1 = ll1->head;
+		ListNode *cur2 = ll2->head;
+
+		int index = 0;
+
+		while (cur1 != NULL) {
+			insertNode(&ll3, index, cur1->item);
+			cur1 = cur1->next;
+			index++;
+
+			if (cur2 != NULL) {
+				insertNode(&ll3, index, cur2->item);
+				cur2 = cur2->next;
+				ll2->size--;
+				index++;
+			}
+		}
+
+		// ll3으로 옮겨진 ll1, ll2이 가진 노드 free 필요
+		// ll3에 삽입할 때 findNode 사용하므로 O(1 + 2 + ... + N) = O(N^2)
+		ll1->size = ll3.size;
+		ll1->head = ll3.head;
+		ll2->head = cur2;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
