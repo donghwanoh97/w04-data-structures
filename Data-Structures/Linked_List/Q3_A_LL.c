@@ -97,6 +97,10 @@ void moveOddItemsToBack(LinkedList *ll)
 	for (int i = 0; i < originalSize; i++) {
 		ListNode *next = cur->next;
 
+		if (cur == tail) {
+        break;
+    }
+
 		if (cur->item % 2 == 0) {
 			prev = cur;
 		}
