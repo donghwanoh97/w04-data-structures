@@ -90,41 +90,64 @@ void moveOddItemsToBack(LinkedList *ll)
 	ListNode *cur = ll->head;
 	ListNode *prev = NULL;
 	ListNode *tail = findNode(ll, ll->size - 1);
-	int count = 0;
 
-	while (count < ll->size) {
-		// 홀수 발견
-		if (cur->item % 2 == 1) {
-			// cur이 마지막 노드
-			if (cur == tail) {
-				break;
-			}
-			// cur이 첫 노드
-			if (prev == NULL) {
-				ll->head = cur->next;
-				cur->next = NULL;
-				tail->next = cur;
-				tail = cur;
+	// int count = 0;
+	int originalSize = ll->size;
 
-				cur = ll->head;
-			} else {
-				ListNode *temp = cur->next;
+	for (int i = 0; i < originalSize; i++) {
+		ListNode *next = cur->next;
 
-				prev->next = cur->next;
-
-				cur->next = NULL;
-				tail->next = cur;
-				tail = cur;
-
-				cur = temp;
-			}
-		} 
-		else {
+		if (cur->item % 2 == 0) {
 			prev = cur;
-			cur = cur->next;
 		}
-		count++;
+		else {
+			if (prev == NULL) {
+				ll->head = next;
+			} else {
+				prev->next = next;
+			}
+
+			cur->next = NULL;
+			tail->next = cur;
+			tail = cur;
+		}
+
+		cur = next;
 	}
+
+	// while (count < ll->size) {
+	// 	// 홀수 발견
+	// 	if (cur->item % 2 == 1) {
+	// 		// cur이 마지막 노드
+	// 		if (cur == tail) {
+	// 			break;
+	// 		}
+	// 		// cur이 첫 노드
+	// 		if (prev == NULL) {
+	// 			ll->head = cur->next;
+	// 			cur->next = NULL;
+	// 			tail->next = cur;
+	// 			tail = cur;
+
+	// 			cur = ll->head;
+	// 		} else {
+	// 			ListNode *temp = cur->next;
+
+	// 			prev->next = cur->next;
+
+	// 			cur->next = NULL;
+	// 			tail->next = cur;
+	// 			tail = cur;
+
+	// 			cur = temp;
+	// 		}
+	// 	} 
+	// 	else {
+	// 		prev = cur;
+	// 		cur = cur->next;
+	// 	}
+	// 	count++;
+	// }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
