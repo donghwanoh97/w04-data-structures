@@ -99,9 +99,10 @@ void moveEvenItemsToBack(LinkedList *ll)
 			prev = cur;
 		}
 		else { // cur이 짝수일 때
-			// if (cur == tail) {
-      //   break;
-    	// }
+			// tail이 안 움직이는 경우
+			if (cur == tail) {
+        break;
+    	}
 
 			if (prev == NULL) { // cur이 첫 노드일 때
 				ll->head = next;

@@ -86,9 +86,42 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 
-int moveMaxToFront(ListNode **ptrHead)
+int moveMaxToFront(ListNode **ptrHead) // ll 없이 head 자체를 다루기 위함
 {
     /* add your code here */
+		// head 이후로 최댓값을 가진 노드 저장
+		ListNode* maxPrev = NULL;
+		ListNode* maxNext = NULL;
+
+		ListNode* prev = NULL;
+		ListNode* cur = *ptrHead;
+
+		ListNode* target = NULL;
+		int maxItem = -1 * __INT_MAX__;
+
+		while (cur != NULL) {
+			if (cur->item > maxItem) {
+				maxItem = cur->item;
+				target = cur;
+				maxPrev = prev;
+				maxNext = cur->next;
+			}
+			prev = cur;
+			cur = cur->next;
+		}
+
+		// 최댓값이 맨 앞에 있을 경우
+		if (maxPrev == NULL) {
+			return 0;
+		}
+
+		// 기존 리스트 연결
+		maxPrev->next = maxNext;
+		// cur을 head에 연결
+		target->next = *ptrHead;
+		// 이렇게 하면 어떻게 될까?
+		// ptrHead = &target;
+		*ptrHead = target;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
