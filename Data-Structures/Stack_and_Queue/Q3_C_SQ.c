@@ -104,7 +104,25 @@ int main()
 int isStackPairwiseConsecutive(Stack *s)
 {
   /* add your code here */
+	if (s->ll.size == 0 || s->ll.size % 2 != 0) {
+		return 0;
+	}
+	
+  /* add your code here */
+	while (!isEmptyStack(s)) {
+		// 2개 pop
+		int x = pop(s);
+		int y = pop(s);
+		// 비교
+		if ((x - y) == -1 || (x - y) == 1) {
+			continue;
+		} else {
+			return 0;
+		}
+	}
+	return 1;
 }
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
